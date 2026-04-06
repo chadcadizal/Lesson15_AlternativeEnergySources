@@ -1,0 +1,1973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 14: Alternative Energy Resources | STS</title>
+<style>
+/* ===== CSS VARIABLES & RESET ===== */
+:root {
+  --green-dark: #1a5c2a;
+  --green-mid: #2d8c4e;
+  --green-light: #4eba72;
+  --green-pale: #c8f0d4;
+  --amber: #f4a72a;
+  --amber-dark: #c97d10;
+  --sky: #0e8fc7;
+  --sky-light: #b8e4f9;
+  --earth: #7a4f2a;
+  --earth-light: #e8d5b8;
+  --bg: #f0faf4;
+  --surface: #ffffff;
+  --text: #1a2e20;
+  --text-light: #4a6553;
+  --border: #b5dfc2;
+  --radius: 14px;
+  --shadow: 0 4px 24px rgba(30,90,50,0.10);
+  --shadow-lg: 0 10px 40px rgba(30,90,50,0.18);
+  --transition: 0.32s cubic-bezier(.4,0,.2,1);
+  --font-head: 'Georgia', 'Times New Roman', serif;
+  --font-body: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ===== HEADER / HERO ===== */
+.hero {
+  background: linear-gradient(135deg, #0e3d1a 0%, #1a5c2a 40%, #2d8c4e 80%, #0e8fc7 100%);
+  color: white;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  min-height: 340px;
+  display: flex;
+  align-items: flex-end;
+}
+.hero-bg-svg {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  opacity: 0.18; pointer-events: none;
+}
+.hero-content {
+  position: relative; z-index: 2;
+  width: 100%; padding: 36px 28px 32px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.hero-badge {
+  display: inline-block;
+  background: var(--amber);
+  color: #1a2e20;
+  font-weight: 800;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 20px;
+  width: fit-content;
+  margin-bottom: 6px;
+}
+.hero h1 {
+  font-family: var(--font-head);
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  line-height: 1.2;
+  font-weight: 700;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+.hero h1 span { color: var(--amber); }
+.hero-sub {
+  font-size: 0.95rem;
+  opacity: 0.88;
+  max-width: 520px;
+}
+.hero-meta {
+  display: flex; flex-wrap: wrap; gap: 16px; margin-top: 8px;
+}
+.hero-meta-item {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 0.82rem; opacity: 0.85;
+}
+.hero-meta-item svg { flex-shrink: 0; }
+
+/* Creator card */
+.creator-card {
+  position: absolute;
+  top: 22px; right: 22px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  border: 1.5px solid rgba(255,255,255,0.28);
+  border-radius: var(--radius);
+  padding: 10px 16px;
+  display: flex; align-items: center; gap: 12px;
+  z-index: 3;
+}
+.creator-avatar {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--amber), var(--green-light));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; font-weight: 800; color: white;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  flex-shrink: 0;
+  border: 2.5px solid rgba(255,255,255,0.5);
+}
+.creator-info { line-height: 1.3; }
+.creator-name { font-weight: 700; font-size: 0.83rem; color: white; }
+.creator-title { font-size: 0.72rem; color: rgba(255,255,255,0.78); }
+
+/* ===== PROGRESS / NAV ===== */
+.progress-bar-wrap {
+  background: white;
+  border-bottom: 2px solid var(--border);
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+.progress-track {
+  height: 4px;
+  background: var(--green-pale);
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--green-mid), var(--amber));
+  width: 0%;
+  transition: width 0.4s ease;
+}
+.section-nav {
+  display: flex; overflow-x: auto; gap: 0;
+  padding: 0; scrollbar-width: none;
+}
+.section-nav::-webkit-scrollbar { display: none; }
+.nav-btn {
+  flex-shrink: 0;
+  background: none; border: none;
+  padding: 12px 16px;
+  font-size: 0.80rem;
+  font-weight: 600;
+  color: var(--text-light);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: var(--transition);
+  white-space: nowrap;
+  display: flex; align-items: center; gap: 6px;
+}
+.nav-btn.active, .nav-btn:hover {
+  color: var(--green-dark);
+  border-bottom-color: var(--green-mid);
+}
+
+/* ===== MAIN LAYOUT ===== */
+.main { max-width: 860px; margin: 0 auto; padding: 0 16px 60px; }
+
+/* ===== SECTIONS ===== */
+.section {
+  padding-top: 44px;
+  animation: fadeUp 0.5s ease both;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.section-header {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 24px;
+}
+.section-icon {
+  width: 48px; height: 48px;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; flex-shrink: 0;
+}
+.section-title {
+  font-family: var(--font-head);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--green-dark);
+}
+.section-subtitle { font-size: 0.88rem; color: var(--text-light); }
+
+/* ===== OBJECTIVES CARD ===== */
+.objectives-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.obj-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 18px;
+  border: 1.5px solid var(--border);
+  display: flex; gap: 14px; align-items: flex-start;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+.obj-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.obj-num {
+  width: 34px; height: 34px;
+  background: linear-gradient(135deg, var(--green-mid), var(--green-dark));
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 1rem; color: white;
+  flex-shrink: 0;
+}
+.obj-text { font-size: 0.88rem; line-height: 1.5; color: var(--text); }
+
+/* ===== INFO BOX ===== */
+.info-box {
+  background: white;
+  border-radius: var(--radius);
+  padding: 22px;
+  border-left: 5px solid var(--green-mid);
+  box-shadow: var(--shadow);
+  margin-bottom: 20px;
+  font-size: 0.93rem;
+  line-height: 1.8;
+}
+.info-box.amber { border-left-color: var(--amber); }
+.info-box.sky { border-left-color: var(--sky); }
+.info-box.earth { border-left-color: var(--earth); background: var(--earth-light); }
+.info-box strong { color: var(--green-dark); }
+.info-box p + p { margin-top: 10px; }
+
+/* ===== COLLAPSIBLES ===== */
+.collapsible {
+  background: white;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border);
+  margin-bottom: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.collapsible-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 20px;
+  cursor: pointer;
+  user-select: none;
+  transition: background var(--transition);
+}
+.collapsible-header:hover { background: var(--green-pale); }
+.collapsible-header-left { display: flex; align-items: center; gap: 12px; }
+.collapsible-emoji { font-size: 1.4rem; }
+.collapsible-title { font-weight: 700; font-size: 0.97rem; color: var(--green-dark); }
+.collapsible-arrow {
+  transition: transform var(--transition);
+  color: var(--green-mid);
+  font-size: 1.1rem;
+}
+.collapsible.open .collapsible-arrow { transform: rotate(180deg); }
+.collapsible-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.45s cubic-bezier(.4,0,.2,1);
+}
+.collapsible.open .collapsible-body { max-height: 1200px; }
+.collapsible-inner { padding: 0 20px 20px; font-size: 0.91rem; line-height: 1.75; }
+.collapsible-inner ul { margin-left: 18px; margin-top: 6px; }
+.collapsible-inner li { margin-bottom: 6px; }
+.adv-tag {
+  display: inline-block;
+  background: var(--green-pale);
+  color: var(--green-dark);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 20px;
+  margin-right: 6px;
+}
+
+/* ===== ENERGY SVG INFOGRAPHIC ===== */
+.svg-wrap {
+  background: white;
+  border-radius: var(--radius);
+  padding: 10px;
+  box-shadow: var(--shadow);
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+.svg-wrap svg { display: block; width: 100%; height: auto; }
+
+/* ===== COMPARISON TABLE ===== */
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  margin-bottom: 24px;
+  font-size: 0.88rem;
+}
+.compare-table th {
+  background: var(--green-dark);
+  color: white;
+  padding: 14px 16px;
+  text-align: left;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.compare-table th:first-child { background: #0e3d1a; }
+.compare-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.compare-table tr:last-child td { border-bottom: none; }
+.compare-table tr:nth-child(even) td { background: #f7fdf9; }
+.badge-yes {
+  display: inline-block;
+  background: #d4f5e0;
+  color: #1a5c2a;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-weight: 700; font-size: 0.78rem;
+}
+.badge-no {
+  display: inline-block;
+  background: #fde8d0;
+  color: #7a3010;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-weight: 700; font-size: 0.78rem;
+}
+
+/* ===== TABS ===== */
+.tab-container { margin-bottom: 24px; }
+.tab-list {
+  display: flex; gap: 4px; flex-wrap: wrap;
+  margin-bottom: 0;
+  border-bottom: 2.5px solid var(--border);
+  padding-bottom: 0;
+}
+.tab-btn {
+  background: none; border: none;
+  padding: 10px 18px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-light);
+  cursor: pointer;
+  border-radius: 8px 8px 0 0;
+  border: 1.5px solid transparent;
+  border-bottom: none;
+  transition: var(--transition);
+  display: flex; align-items: center; gap: 6px;
+  margin-bottom: -2.5px;
+}
+.tab-btn.active {
+  background: white;
+  color: var(--green-dark);
+  border-color: var(--border);
+  border-bottom-color: white;
+}
+.tab-btn:hover:not(.active) { background: var(--green-pale); color: var(--green-dark); }
+.tab-panel {
+  display: none;
+  background: white;
+  border: 1.5px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+  padding: 22px;
+  animation: fadeUp 0.3s ease;
+}
+.tab-panel.active { display: block; }
+.tab-panel h4 {
+  color: var(--green-dark);
+  font-size: 1rem;
+  margin-bottom: 8px;
+  margin-top: 12px;
+  font-weight: 700;
+}
+.tab-panel h4:first-child { margin-top: 0; }
+.tab-panel p { font-size: 0.91rem; line-height: 1.8; color: var(--text); margin-bottom: 8px; }
+.energy-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--green-pale);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin: 3px;
+  color: var(--green-dark);
+}
+
+/* ===== CRISIS TIMELINE ===== */
+.timeline {
+  position: relative;
+  padding-left: 32px;
+  margin-bottom: 24px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 10px; top: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--green-mid), var(--amber), var(--sky));
+  border-radius: 2px;
+}
+.tl-item {
+  position: relative;
+  margin-bottom: 20px;
+  animation: fadeUp 0.5s ease both;
+}
+.tl-dot {
+  position: absolute;
+  left: -27px; top: 4px;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--green-mid);
+  border: 3px solid white;
+  box-shadow: 0 0 0 2px var(--green-mid);
+}
+.tl-year {
+  font-weight: 800;
+  font-size: 0.78rem;
+  color: var(--amber-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.tl-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--green-dark);
+  margin: 2px 0;
+}
+.tl-text {
+  font-size: 0.87rem;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+/* ===== DRAG AND DROP ===== */
+.dnd-section {
+  background: white;
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  margin-bottom: 24px;
+}
+.dnd-section h3 {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--green-dark);
+  margin-bottom: 6px;
+}
+.dnd-instruction {
+  font-size: 0.82rem;
+  color: var(--text-light);
+  margin-bottom: 18px;
+  background: var(--green-pale);
+  padding: 8px 14px;
+  border-radius: 8px;
+}
+.dnd-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+@media(max-width:560px){ .dnd-columns { grid-template-columns: 1fr; } }
+.dnd-pool {
+  border: 2px dashed var(--border);
+  border-radius: 12px;
+  padding: 14px;
+  min-height: 80px;
+}
+.dnd-pool-title {
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 10px;
+  color: var(--text-light);
+}
+.dnd-drop-zones {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+@media(max-width:560px){ .dnd-drop-zones { grid-template-columns: 1fr; } }
+.drop-zone {
+  border: 2.5px dashed var(--green-mid);
+  border-radius: 12px;
+  padding: 14px;
+  min-height: 130px;
+  transition: background 0.2s;
+}
+.drop-zone.dragover { background: var(--green-pale); border-color: var(--green-dark); }
+.drop-zone-label {
+  font-weight: 800;
+  font-size: 0.85rem;
+  color: var(--green-dark);
+  margin-bottom: 8px;
+  display: flex; align-items: center; gap: 6px;
+}
+.draggable {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--green-mid), var(--green-dark));
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: grab;
+  margin: 4px;
+  user-select: none;
+  transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+  box-shadow: 0 2px 8px rgba(30,90,50,0.2);
+}
+.draggable:active { cursor: grabbing; transform: scale(1.08); box-shadow: 0 6px 20px rgba(30,90,50,0.35); }
+.draggable.placed { opacity: 0.5; pointer-events: none; }
+.draggable.correct-dnd { background: linear-gradient(135deg, #1a8c3a, #0d5c22); }
+.draggable.wrong-dnd { background: linear-gradient(135deg, #c0392b, #8e1010); }
+.dnd-feedback {
+  min-height: 36px;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 0.87rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 12px;
+  display: none;
+}
+.dnd-feedback.show { display: block; }
+.dnd-feedback.correct { background: #d4f5e0; color: #1a5c2a; }
+.dnd-feedback.wrong { background: #fde8d0; color: #7a3010; }
+.dnd-feedback.partial { background: #fff3cd; color: #7a5c10; }
+.dnd-btn {
+  background: linear-gradient(135deg, var(--green-mid), var(--green-dark));
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 22px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-right: 8px;
+}
+.dnd-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(30,90,50,0.3); }
+.dnd-btn.secondary {
+  background: white;
+  color: var(--green-dark);
+  border: 2px solid var(--green-mid);
+}
+
+/* ===== QUIZ ===== */
+.quiz-wrap {
+  background: white;
+  border-radius: var(--radius);
+  padding: 26px;
+  box-shadow: var(--shadow);
+  margin-bottom: 24px;
+}
+.quiz-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 18px;
+}
+.quiz-title {
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--green-dark);
+}
+.quiz-score-badge {
+  background: var(--green-pale);
+  color: var(--green-dark);
+  font-weight: 800;
+  font-size: 0.85rem;
+  padding: 4px 14px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+}
+.question-card {
+  display: none;
+  animation: fadeUp 0.35s ease;
+}
+.question-card.active { display: block; }
+.q-num {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--amber-dark);
+  margin-bottom: 6px;
+}
+.q-text {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 18px;
+  line-height: 1.5;
+}
+.q-options { display: grid; gap: 10px; }
+.q-option {
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  padding: 13px 16px;
+  cursor: pointer;
+  font-size: 0.91rem;
+  transition: all 0.2s;
+  display: flex; align-items: center; gap: 12px;
+  user-select: none;
+}
+.q-option:hover { border-color: var(--green-mid); background: var(--green-pale); }
+.q-option.selected { border-color: var(--sky); background: var(--sky-light); }
+.q-option.correct { border-color: var(--green-mid); background: #d4f5e0; }
+.q-option.wrong { border-color: #e74c3c; background: #fde8d0; }
+.q-option-letter {
+  width: 28px; height: 28px;
+  border-radius: 8px;
+  background: var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 0.8rem; flex-shrink: 0;
+  transition: all 0.2s;
+}
+.q-option.correct .q-option-letter { background: var(--green-mid); color: white; }
+.q-option.wrong .q-option-letter { background: #e74c3c; color: white; }
+.q-feedback {
+  margin-top: 14px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  display: none;
+  animation: fadeUp 0.3s ease;
+}
+.q-feedback.show { display: block; }
+.q-feedback.correct-fb { background: #d4f5e0; border: 1.5px solid var(--green-mid); color: #1a5c2a; }
+.q-feedback.wrong-fb { background: #fde8d0; border: 1.5px solid #e74c3c; color: #7a2010; }
+.quiz-nav {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: 22px;
+}
+.quiz-btn {
+  background: linear-gradient(135deg, var(--green-mid), var(--green-dark));
+  color: white; border: none;
+  border-radius: 10px; padding: 10px 22px;
+  font-size: 0.88rem; font-weight: 700;
+  cursor: pointer; transition: var(--transition);
+}
+.quiz-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(30,90,50,0.3); }
+.quiz-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+.quiz-btn.outline {
+  background: white; color: var(--green-dark);
+  border: 2px solid var(--green-mid);
+}
+.q-progress-dots {
+  display: flex; gap: 6px;
+}
+.q-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--border);
+  transition: background 0.3s;
+}
+.q-dot.done { background: var(--green-mid); }
+.q-dot.current { background: var(--amber); transform: scale(1.25); }
+.quiz-results {
+  display: none;
+  text-align: center;
+  animation: fadeUp 0.4s ease;
+}
+.quiz-results.show { display: block; }
+.result-emoji { font-size: 3.5rem; margin-bottom: 10px; }
+.result-score {
+  font-family: var(--font-head);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--green-dark);
+}
+.result-msg { font-size: 0.95rem; color: var(--text-light); margin: 8px 0 20px; }
+
+/* ===== SUMMARY CARDS ===== */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.summary-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 18px 16px;
+  border: 1.5px solid var(--border);
+  box-shadow: var(--shadow);
+  text-align: center;
+  transition: var(--transition);
+}
+.summary-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.summary-card-icon { font-size: 2rem; margin-bottom: 8px; }
+.summary-card-title { font-weight: 800; font-size: 0.88rem; color: var(--green-dark); margin-bottom: 4px; }
+.summary-card-text { font-size: 0.78rem; color: var(--text-light); line-height: 1.5; }
+
+/* ===== DIVIDER ===== */
+.divider {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 36px 0;
+}
+
+/* ===== CALLOUT ===== */
+.callout {
+  background: linear-gradient(135deg, var(--green-dark), #0e3d1a);
+  color: white;
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  margin-bottom: 24px;
+  display: flex; gap: 16px; align-items: flex-start;
+}
+.callout-icon { font-size: 2rem; flex-shrink: 0; }
+.callout-title { font-weight: 800; font-size: 1rem; margin-bottom: 4px; }
+.callout-text { font-size: 0.88rem; opacity: 0.9; line-height: 1.6; }
+
+/* ===== PHILIPPINES CONTEXT ===== */
+.ph-banner {
+  background: linear-gradient(135deg, #0035a3 0%, #ce1127 50%, #fcd116 100%);
+  border-radius: var(--radius);
+  padding: 18px 22px;
+  color: white;
+  margin-bottom: 20px;
+  display: flex; align-items: center; gap: 16px;
+  box-shadow: var(--shadow);
+}
+.ph-flag { font-size: 2.2rem; flex-shrink: 0; }
+.ph-text-title { font-weight: 800; font-size: 0.97rem; margin-bottom: 3px; }
+.ph-text-sub { font-size: 0.83rem; opacity: 0.92; line-height: 1.5; }
+
+/* ===== FOOTER ===== */
+.footer {
+  background: var(--green-dark);
+  color: white;
+  text-align: center;
+  padding: 28px 16px;
+  font-size: 0.82rem;
+  opacity: 0.92;
+  margin-top: 40px;
+}
+.footer span { opacity: 0.7; }
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:600px){
+  .creator-card { top: 12px; right: 12px; padding: 8px 10px; gap: 8px; }
+  .creator-avatar { width: 38px; height: 38px; font-size: 1.1rem; }
+  .hero-content { padding: 22px 16px 24px; }
+  .tab-btn { padding: 8px 12px; font-size: 0.78rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HERO SECTION ===== -->
+<header class="hero">
+  <!-- Animated SVG background pattern -->
+  <svg class="hero-bg-svg" viewBox="0 0 900 340" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <!-- Sun rays -->
+    <circle cx="760" cy="80" r="55" fill="#f4a72a" opacity="0.5"/>
+    <circle cx="760" cy="80" r="80" fill="#f4a72a" opacity="0.2"/>
+    <!-- Wind turbine silhouettes -->
+    <rect x="100" y="180" width="5" height="100" fill="white" opacity="0.4"/>
+    <polygon points="102,180 80,140 105,165" fill="white" opacity="0.4"/>
+    <polygon points="102,180 130,148 104,175" fill="white" opacity="0.4"/>
+    <polygon points="102,180 105,138 100,168" fill="white" opacity="0.35"/>
+    <rect x="200" y="200" width="4" height="80" fill="white" opacity="0.3"/>
+    <polygon points="202,200 185,165 204,190" fill="white" opacity="0.3"/>
+    <polygon points="202,200 225,172 203,193" fill="white" opacity="0.3"/>
+    <!-- Waves -->
+    <path d="M0,300 Q150,270 300,295 Q450,320 600,290 Q750,260 900,285 L900,340 L0,340Z" fill="white" opacity="0.07"/>
+    <path d="M0,315 Q200,285 400,310 Q600,335 800,305 L900,300 L900,340 L0,340Z" fill="white" opacity="0.05"/>
+    <!-- Solar panel silhouette -->
+    <rect x="600" y="220" width="120" height="80" rx="6" fill="#0e8fc7" opacity="0.25"/>
+    <line x1="600" y1="247" x2="720" y2="247" stroke="white" stroke-width="1.5" opacity="0.3"/>
+    <line x1="600" y1="274" x2="720" y2="274" stroke="white" stroke-width="1.5" opacity="0.3"/>
+    <line x1="640" y1="220" x2="640" y2="300" stroke="white" stroke-width="1.5" opacity="0.3"/>
+    <line x1="680" y1="220" x2="680" y2="300" stroke="white" stroke-width="1.5" opacity="0.3"/>
+    <!-- Leaf shapes -->
+    <ellipse cx="450" cy="260" rx="35" ry="18" fill="#4eba72" opacity="0.3" transform="rotate(-25,450,260)"/>
+    <ellipse cx="480" cy="255" rx="28" ry="14" fill="#2d8c4e" opacity="0.25" transform="rotate(15,480,255)"/>
+  </svg>
+
+  <!-- Creator card top-right -->
+  <div class="creator-card">
+    <div class="creator-avatar">RC</div>
+    <div class="creator-info">
+      <div class="creator-name">Richard Cadizal</div>
+      <div class="creator-title">College Instructor · DMMMSU</div>
+    </div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-badge">🌱 STS · Module 7 · Lesson 14</div>
+    <h1>Alternative <span>Energy</span> Resources</h1>
+    <p class="hero-sub">Science, Technology and Society — A journey from fossil fuels to a sustainable future</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        BS Psychology &amp; BS Agriculture
+      </div>
+      <div class="hero-meta-item">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Estimated: 60–75 minutes
+      </div>
+      <div class="hero-meta-item">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        3 Lessons · Quiz · Activities
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ===== STICKY NAVIGATION ===== -->
+<nav class="progress-bar-wrap" id="stickyNav">
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="section-nav">
+    <button class="nav-btn active" onclick="scrollToSection('objectives')">🎯 Objectives</button>
+    <button class="nav-btn" onclick="scrollToSection('intro')">📖 Introduction</button>
+    <button class="nav-btn" onclick="scrollToSection('crisis')">⚡ Energy Crisis</button>
+    <button class="nav-btn" onclick="scrollToSection('sources')">🌿 Energy Sources</button>
+    <button class="nav-btn" onclick="scrollToSection('activity')">🎮 Activity</button>
+    <button class="nav-btn" onclick="scrollToSection('quiz')">📝 Quiz</button>
+    <button class="nav-btn" onclick="scrollToSection('summary')">✅ Summary</button>
+  </div>
+</nav>
+
+<main class="main">
+
+<!-- ===== LEARNING OBJECTIVES ===== -->
+<section class="section" id="objectives">
+  <div class="section-header">
+    <div class="section-icon" style="background:#d4f5e0;">🎯</div>
+    <div>
+      <div class="section-title">Learning Objectives</div>
+      <div class="section-subtitle">By the end of this lesson, you will be able to:</div>
+    </div>
+  </div>
+  <div class="objectives-grid">
+    <div class="obj-card">
+      <div class="obj-num">1</div>
+      <div class="obj-text"><strong>Define</strong> energy crisis and explain why it exists in today's world.</div>
+    </div>
+    <div class="obj-card">
+      <div class="obj-num">2</div>
+      <div class="obj-text"><strong>Define</strong> alternative energy sources and their reasons for existence.</div>
+    </div>
+    <div class="obj-card">
+      <div class="obj-num">3</div>
+      <div class="obj-text"><strong>Identify</strong> the commonly known alternative energy sources and their advantages.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== INTRODUCTION ===== -->
+<section class="section" id="intro">
+  <div class="section-header">
+    <div class="section-icon" style="background:#e8f4fd;">📖</div>
+    <div>
+      <div class="section-title">Introduction</div>
+      <div class="section-subtitle">Why does the world need to change its energy habits?</div>
+    </div>
+  </div>
+
+  <div class="ph-banner">
+    <div class="ph-flag">🇵🇭</div>
+    <div>
+      <div class="ph-text-title">Philippine Context</div>
+      <div class="ph-text-sub">The Philippines and many countries have depended on coal, oil, and natural gas for over a century. With rising fuel prices and environmental damage, the shift to alternative energy is now more urgent than ever.</div>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <p>For the past hundred years, the world has relied on the same fossil fuels — <strong>coal, gasoline, and natural gas</strong>. While these fuels have powered modern civilization, burning them releases enormous amounts of carbon dioxide (CO₂), driving global warming and climate change.</p>
+    <p>The rate of consumption is alarming. Scientists and governments around the world are now searching for energy resources that are <strong>cleaner, more economical, and environmentally sustainable</strong> — benefiting both present and future generations.</p>
+  </div>
+
+  <!-- SVG Infographic: Fossil vs. Alternative -->
+  <div class="svg-wrap">
+    <svg viewBox="0 0 760 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fossil fuels vs Alternative energy comparison">
+      <!-- Background panels -->
+      <rect x="0" y="0" width="370" height="240" rx="14" fill="#fff5ee"/>
+      <rect x="390" y="0" width="370" height="240" rx="14" fill="#f0faf4"/>
+      <!-- Titles -->
+      <text x="185" y="32" text-anchor="middle" font-family="Georgia,serif" font-size="15" font-weight="700" fill="#8b2500">⛽ Fossil Fuels</text>
+      <text x="575" y="32" text-anchor="middle" font-family="Georgia,serif" font-size="15" font-weight="700" fill="#1a5c2a">🌿 Alternative Energy</text>
+      <!-- Fossil icons and labels -->
+      <text x="55" y="80" text-anchor="middle" font-size="28">🏭</text>
+      <text x="55" y="100" text-anchor="middle" font-size="10" fill="#8b2500" font-weight="600">Coal</text>
+      <text x="135" y="80" text-anchor="middle" font-size="28">🛢️</text>
+      <text x="135" y="100" text-anchor="middle" font-size="10" fill="#8b2500" font-weight="600">Oil</text>
+      <text x="215" y="80" text-anchor="middle" font-size="28">🔥</text>
+      <text x="215" y="100" text-anchor="middle" font-size="10" fill="#8b2500" font-weight="600">Nat. Gas</text>
+      <text x="305" y="80" text-anchor="middle" font-size="28">💨</text>
+      <text x="305" y="100" text-anchor="middle" font-size="10" fill="#8b2500" font-weight="600">Emissions</text>
+      <!-- Fossil negatives -->
+      <text x="10" y="130" font-size="10" fill="#8b2500">❌ Finite supply — will run out</text>
+      <text x="10" y="148" font-size="10" fill="#8b2500">❌ High CO₂ emissions</text>
+      <text x="10" y="166" font-size="10" fill="#8b2500">❌ Soil &amp; water pollution</text>
+      <text x="10" y="184" font-size="10" fill="#8b2500">❌ Price volatility (geopolitics)</text>
+      <text x="10" y="202" font-size="10" fill="#8b2500">❌ Contributes to climate change</text>
+      <!-- Alternative icons -->
+      <text x="435" y="80" text-anchor="middle" font-size="28">☀️</text>
+      <text x="435" y="100" text-anchor="middle" font-size="10" fill="#1a5c2a" font-weight="600">Solar</text>
+      <text x="495" y="80" text-anchor="middle" font-size="28">💨</text>
+      <text x="495" y="100" text-anchor="middle" font-size="10" fill="#1a5c2a" font-weight="600">Wind</text>
+      <text x="555" y="80" text-anchor="middle" font-size="28">🌊</text>
+      <text x="555" y="100" text-anchor="middle" font-size="10" fill="#1a5c2a" font-weight="600">Hydro</text>
+      <text x="615" y="80" text-anchor="middle" font-size="28">🌋</text>
+      <text x="615" y="100" text-anchor="middle" font-size="10" fill="#1a5c2a" font-weight="600">Geo</text>
+      <text x="685" y="80" text-anchor="middle" font-size="28">🌿</text>
+      <text x="685" y="100" text-anchor="middle" font-size="10" fill="#1a5c2a" font-weight="600">Biomass</text>
+      <!-- Alternative positives -->
+      <text x="400" y="130" font-size="10" fill="#1a5c2a">✅ Renewable — always available</text>
+      <text x="400" y="148" font-size="10" fill="#1a5c2a">✅ Zero or very low emissions</text>
+      <text x="400" y="166" font-size="10" fill="#1a5c2a">✅ Environmentally friendly</text>
+      <text x="400" y="184" font-size="10" fill="#1a5c2a">✅ Reduces energy dependence</text>
+      <text x="400" y="202" font-size="10" fill="#1a5c2a">✅ Helps combat climate change</text>
+      <!-- Divider arrow -->
+      <text x="380" y="125" text-anchor="middle" font-size="28">→</text>
+      <text x="380" y="142" text-anchor="middle" font-size="9" fill="#444">Shift to</text>
+    </svg>
+  </div>
+
+  <div class="info-box amber">
+    <p><strong>What is Alternative Energy?</strong> Alternative energy refers to any energy source that serves as a substitute for fossil fuels (coal, gasoline, natural gas). These alternatives address concerns like high carbon dioxide emissions and global warming. Alternative energy is a <em>broader category</em> encompassing all non-fossil-fuel energy sources — renewable energies are only a part of it.</p>
+    <p><strong>What is Renewable Energy?</strong> Renewable energy comes from naturally occurring sources that replenish on their own — solar, wind, geothermal, hydro, biomass, waves, and tides. The most abundant is solar energy.</p>
+  </div>
+
+  <!-- Comparison Table -->
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>🌿 Renewable Energy</th>
+        <th>⚡ Alternative Energy</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Naturally replenishes?</strong></td>
+        <td><span class="badge-yes">✓ Yes — always</span></td>
+        <td><span class="badge-no">Not always</span></td>
+      </tr>
+      <tr>
+        <td><strong>Includes solar, wind, hydro?</strong></td>
+        <td><span class="badge-yes">✓ Yes</span></td>
+        <td><span class="badge-yes">✓ Yes</span></td>
+      </tr>
+      <tr>
+        <td><strong>Includes natural gas / fuel cells?</strong></td>
+        <td><span class="badge-no">✗ No</span></td>
+        <td><span class="badge-yes">✓ Yes (lower emissions)</span></td>
+      </tr>
+      <tr>
+        <td><strong>Reduces carbon emissions?</strong></td>
+        <td><span class="badge-yes">✓ Yes</span></td>
+        <td><span class="badge-yes">✓ Yes</span></td>
+      </tr>
+      <tr>
+        <td><strong>Infinite in supply?</strong></td>
+        <td><span class="badge-yes">✓ Yes</span></td>
+        <td><span class="badge-no">Not necessarily</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== ENERGY CRISIS ===== -->
+<section class="section" id="crisis">
+  <div class="section-header">
+    <div class="section-icon" style="background:#fff3cd;">⚡</div>
+    <div>
+      <div class="section-title">Lesson 1: Energy Crisis</div>
+      <div class="section-subtitle">Understanding the roots of the global energy problem</div>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <p><strong>Energy Crisis</strong> refers to any significant decrease in the supply of energy resources to an economy at a certain time and place. It affects electric power supply, fuel for machinery, and transportation.</p>
+  </div>
+
+  <!-- Timeline -->
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--amber);box-shadow:0 0 0 2px var(--amber);"></div>
+      <div class="tl-year">Industrial Revolution (1800s–1900s)</div>
+      <div class="tl-title">Rise of Fossil Fuel Dependency</div>
+      <div class="tl-text">Industrialization and population growth drove skyrocketing demand for coal, oil, and natural gas. The world became deeply dependent on these finite resources.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#e74c3c;box-shadow:0 0 0 2px #e74c3c;"></div>
+      <div class="tl-year">2000s Energy Crisis</div>
+      <div class="tl-title">Oil Hits Record Highs</div>
+      <div class="tl-text">Middle East tensions, the falling U.S. dollar, peak oil concerns, and price speculation triggered a major crisis. Oil hit an all-time high of <strong>$147.30 per barrel in 2008</strong>.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--sky);box-shadow:0 0 0 2px var(--sky);"></div>
+      <div class="tl-year">2018 — Philippines</div>
+      <div class="tl-title">TRAIN Law Impact</div>
+      <div class="tl-text">World oil prices tripled. Diesel in the Philippines reached <strong>₱41.10/liter</strong> (June 2018). The TRAIN Law's excise tax adjustments further raised diesel and gasoline prices, highlighting the urgency of alternative energy development.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--green-mid);box-shadow:0 0 0 2px var(--green-mid);"></div>
+      <div class="tl-year">Present Day</div>
+      <div class="tl-title">Global Push for Alternative Energy</div>
+      <div class="tl-text">Countries worldwide are investing heavily in solar, wind, geothermal, and other renewable technologies. The Philippines, with its volcanic geography and tropical climate, has great potential for multiple energy sources.</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-icon">💡</div>
+    <div>
+      <div class="callout-title">Why does the Energy Crisis exist?</div>
+      <div class="callout-text">The energy crisis arises from a combination of factors: rapid population growth, industrial expansion, geopolitical instability in oil-producing regions, finite fossil fuel reserves, and the lack of sufficient investment in alternative energy infrastructure. As global demand continues to rise, supply cannot keep up — making the transition to alternative energy not just beneficial, but <em>necessary</em>.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== ENERGY SOURCES TABS ===== -->
+<section class="section" id="sources">
+  <div class="section-header">
+    <div class="section-icon" style="background:#d4f5e0;">🌿</div>
+    <div>
+      <div class="section-title">Lessons 2 & 3: Alternative Energy Sources</div>
+      <div class="section-subtitle">Explore each energy type — click a tab to learn more</div>
+    </div>
+  </div>
+
+  <!-- Wheel SVG infographic -->
+  <div class="svg-wrap">
+    <svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Alternative energy sources wheel">
+      <!-- Center circle -->
+      <circle cx="350" cy="110" r="46" fill="#1a5c2a"/>
+      <text x="350" y="106" text-anchor="middle" font-size="13" font-weight="800" fill="white" font-family="Georgia,serif">ALTERNATIVE</text>
+      <text x="350" y="122" text-anchor="middle" font-size="13" font-weight="800" fill="#f4a72a" font-family="Georgia,serif">ENERGY</text>
+      <!-- Surrounding nodes -->
+      <!-- Solar top -->
+      <circle cx="350" cy="28" r="28" fill="#f4a72a" opacity="0.9"/>
+      <text x="350" y="24" text-anchor="middle" font-size="18">☀️</text>
+      <text x="350" y="43" text-anchor="middle" font-size="9" fill="#7a4000" font-weight="700">Solar</text>
+      <line x1="350" y1="56" x2="350" y2="64" stroke="#ccc" stroke-width="1.5"/>
+      <!-- Hydro top-left -->
+      <circle cx="206" cy="56" r="28" fill="#0e8fc7" opacity="0.9"/>
+      <text x="206" y="52" text-anchor="middle" font-size="18">💧</text>
+      <text x="206" y="71" text-anchor="middle" font-size="9" fill="#0a4f7a" font-weight="700">Hydro</text>
+      <line x1="228" y1="70" x2="310" y2="88" stroke="#ccc" stroke-width="1.5"/>
+      <!-- Wind top-right -->
+      <circle cx="494" cy="56" r="28" fill="#4eba72" opacity="0.9"/>
+      <text x="494" y="52" text-anchor="middle" font-size="18">💨</text>
+      <text x="494" y="71" text-anchor="middle" font-size="9" fill="#1a5c2a" font-weight="700">Wind</text>
+      <line x1="472" y1="70" x2="390" y2="88" stroke="#ccc" stroke-width="1.5"/>
+      <!-- Geothermal left -->
+      <circle cx="148" cy="120" r="28" fill="#c0392b" opacity="0.85"/>
+      <text x="148" y="116" text-anchor="middle" font-size="18">🌋</text>
+      <text x="148" y="135" text-anchor="middle" font-size="9" fill="#5c1a1a" font-weight="700">Geothermal</text>
+      <line x1="176" y1="120" x2="304" y2="112" stroke="#ccc" stroke-width="1.5"/>
+      <!-- Tidal right -->
+      <circle cx="552" cy="120" r="28" fill="#1a78c2" opacity="0.85"/>
+      <text x="552" y="116" text-anchor="middle" font-size="18">🌊</text>
+      <text x="552" y="135" text-anchor="middle" font-size="9" fill="#0a2f5c" font-weight="700">Tidal/Wave</text>
+      <line x1="524" y1="120" x2="396" y2="112" stroke="#ccc" stroke-width="1.5"/>
+      <!-- Biomass bottom-left -->
+      <circle cx="206" cy="184" r="28" fill="#7a4f2a" opacity="0.85"/>
+      <text x="206" y="180" text-anchor="middle" font-size="18">🌾</text>
+      <text x="206" y="199" text-anchor="middle" font-size="9" fill="#3d2510" font-weight="700">Biomass</text>
+      <line x1="228" y1="170" x2="310" y2="138" stroke="#ccc" stroke-width="1.5"/>
+      <!-- OTEC bottom-right -->
+      <circle cx="494" cy="184" r="28" fill="#2ecc71" opacity="0.85"/>
+      <text x="494" y="180" text-anchor="middle" font-size="18">🌡️</text>
+      <text x="494" y="199" text-anchor="middle" font-size="9" fill="#0d5c2a" font-weight="700">OTEC</text>
+      <line x1="472" y1="170" x2="390" y2="138" stroke="#ccc" stroke-width="1.5"/>
+    </svg>
+  </div>
+
+  <!-- Tabbed content for each energy source -->
+  <div class="tab-container">
+    <div class="tab-list" role="tablist">
+      <button class="tab-btn active" onclick="switchTab(this,'tab-hydro')" role="tab">💧 Hydro</button>
+      <button class="tab-btn" onclick="switchTab(this,'tab-solar')" role="tab">☀️ Solar</button>
+      <button class="tab-btn" onclick="switchTab(this,'tab-wind')" role="tab">💨 Wind</button>
+      <button class="tab-btn" onclick="switchTab(this,'tab-biomass')" role="tab">🌾 Biomass</button>
+      <button class="tab-btn" onclick="switchTab(this,'tab-geo')" role="tab">🌋 Geothermal</button>
+      <button class="tab-btn" onclick="switchTab(this,'tab-tidal')" role="tab">🌊 Tidal/Wave</button>
+      <button class="tab-btn" onclick="switchTab(this,'tab-otec')" role="tab">🌡️ OTEC</button>
+    </div>
+
+    <!-- HYDRO -->
+    <div class="tab-panel active" id="tab-hydro" role="tabpanel">
+      <h4>💧 Hydroelectric Energy</h4>
+      <p>The potential energy stored in water held in dams drives a water turbine and generator, producing <strong>hydroelectric power</strong>. This is currently the <strong>most widely adopted</strong> alternative energy source worldwide.</p>
+      <svg viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:500px;display:block;margin:12px auto;">
+        <!-- Dam diagram -->
+        <rect x="0" y="0" width="500" height="160" rx="10" fill="#e8f4fd"/>
+        <!-- Reservoir -->
+        <rect x="10" y="40" width="160" height="100" rx="6" fill="#0e8fc7" opacity="0.7"/>
+        <text x="90" y="88" text-anchor="middle" font-size="11" fill="white" font-weight="700">Reservoir</text>
+        <text x="90" y="103" text-anchor="middle" font-size="10" fill="white">💧 Stored Water</text>
+        <!-- Dam wall -->
+        <rect x="170" y="30" width="28" height="115" rx="4" fill="#888"/>
+        <text x="184" y="92" text-anchor="middle" font-size="9" fill="white" font-weight="700" transform="rotate(-90,184,92)">DAM</text>
+        <!-- Penstock (water pipe going through dam) -->
+        <rect x="185" y="90" width="70" height="16" rx="3" fill="#555"/>
+        <text x="220" y="101" text-anchor="middle" font-size="8" fill="white">Penstock</text>
+        <!-- Turbine -->
+        <circle cx="280" cy="98" r="20" fill="#f4a72a" opacity="0.9"/>
+        <text x="280" y="93" text-anchor="middle" font-size="9" fill="white" font-weight="700">⚙️</text>
+        <text x="280" y="107" text-anchor="middle" font-size="8" fill="white">Turbine</text>
+        <!-- Generator -->
+        <rect x="310" y="82" width="50" height="32" rx="6" fill="#2d8c4e"/>
+        <text x="335" y="101" text-anchor="middle" font-size="9" fill="white" font-weight="700">GEN</text>
+        <!-- Power lines -->
+        <line x1="360" y1="98" x2="420" y2="60" stroke="#f4a72a" stroke-width="2"/>
+        <line x1="420" y1="60" x2="490" y2="60" stroke="#f4a72a" stroke-width="2"/>
+        <text x="450" y="50" text-anchor="middle" font-size="10" fill="#7a5c00">⚡ Electricity</text>
+        <!-- Tailrace river -->
+        <path d="M300,130 Q380,140 490,135" stroke="#0e8fc7" stroke-width="4" fill="none" opacity="0.6"/>
+        <text x="400" y="155" text-anchor="middle" font-size="9" fill="#0e5c8f">River Downstream</text>
+      </svg>
+      <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:6px;">
+        <span class="adv-tag">✅ Advantage</span>
+        <span class="energy-chip">💰 Water source is free</span>
+        <span class="energy-chip">🔄 Virtually continuous generation</span>
+        <span class="energy-chip">♻️ Water can be reused</span>
+        <span class="energy-chip">🌱 No chemical process — clean energy</span>
+      </div>
+    </div>
+
+    <!-- SOLAR -->
+    <div class="tab-panel" id="tab-solar" role="tabpanel">
+      <h4>☀️ Solar Energy</h4>
+      <p>Solar energy is the energy Earth receives from the sun — one of the most promising alternative sources, available for <strong>centuries to come</strong>. Energy is generated by <strong>photovoltaic (PV) cells</strong> that convert sunlight directly into electricity. Solar energy is also used for water heating and cooking.</p>
+      <svg viewBox="0 0 500 150" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:500px;display:block;margin:12px auto;">
+        <rect x="0" y="0" width="500" height="150" rx="10" fill="#fffde7"/>
+        <!-- Sun -->
+        <circle cx="80" cy="70" r="38" fill="#f4a72a" opacity="0.9"/>
+        <text x="80" y="75" text-anchor="middle" font-size="26">☀️</text>
+        <!-- Sun rays -->
+        <line x1="122" y1="70" x2="145" y2="70" stroke="#f4a72a" stroke-width="2.5" stroke-dasharray="4,3"/>
+        <!-- Solar panels -->
+        <rect x="150" y="45" width="120" height="80" rx="6" fill="#0e5c8f" opacity="0.85"/>
+        <line x1="150" y1="72" x2="270" y2="72" stroke="white" stroke-width="1.5" opacity="0.5"/>
+        <line x1="150" y1="99" x2="270" y2="99" stroke="white" stroke-width="1.5" opacity="0.5"/>
+        <line x1="190" y1="45" x2="190" y2="125" stroke="white" stroke-width="1.5" opacity="0.5"/>
+        <line x1="230" y1="45" x2="230" y2="125" stroke="white" stroke-width="1.5" opacity="0.5"/>
+        <text x="210" y="142" text-anchor="middle" font-size="9" fill="#0e5c8f" font-weight="700">Photovoltaic Cells</text>
+        <!-- Arrow + Inverter -->
+        <line x1="270" y1="85" x2="310" y2="85" stroke="#555" stroke-width="2"/>
+        <rect x="310" y="72" width="50" height="26" rx="6" fill="#2d8c4e"/>
+        <text x="335" y="89" text-anchor="middle" font-size="9" fill="white" font-weight="700">Inverter</text>
+        <line x1="360" y1="85" x2="400" y2="85" stroke="#555" stroke-width="2"/>
+        <!-- Usages -->
+        <text x="415" y="60" text-anchor="middle" font-size="14">🏠</text>
+        <text x="415" y="80" text-anchor="middle" font-size="9" fill="#444">Home</text>
+        <text x="455" y="60" text-anchor="middle" font-size="14">🏭</text>
+        <text x="455" y="80" text-anchor="middle" font-size="9" fill="#444">Industry</text>
+        <text x="435" y="105" text-anchor="middle" font-size="9" fill="#7a5c00">⚡ Electricity Output</text>
+      </svg>
+      <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:6px;">
+        <span class="adv-tag">✅ Advantage</span>
+        <span class="energy-chip">💡 Source (sunlight) is free</span>
+        <span class="energy-chip">🌙 Stored for nighttime use</span>
+        <span class="energy-chip">🏡 Works in rural/remote areas</span>
+        <span class="energy-chip">🌱 Clean generation</span>
+        <span class="energy-chip">♾️ Available for thousands of years</span>
+      </div>
+    </div>
+
+    <!-- WIND -->
+    <div class="tab-panel" id="tab-wind" role="tabpanel">
+      <h4>💨 Wind Energy</h4>
+      <p>Wind energy harnesses the power of moving air to spin wind turbine blades connected to an electric generator. It is most effective in areas with <strong>high, consistent wind velocity</strong>.</p>
+      <svg viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:400px;display:block;margin:12px auto;">
+        <rect x="0" y="0" width="400" height="160" rx="10" fill="#e8f8ff"/>
+        <!-- Sky -->
+        <path d="M0,0 Q200,-20 400,0 L400,80 Q200,100 0,80Z" fill="#b8e4f9" opacity="0.5"/>
+        <!-- Ground -->
+        <rect x="0" y="120" width="400" height="40" rx="0" fill="#c8f0d4"/>
+        <!-- Tower -->
+        <line x1="200" y1="120" x2="210" y2="60" stroke="#888" stroke-width="7" stroke-linecap="round"/>
+        <!-- Blades -->
+        <line x1="210" y1="60" x2="185" y2="28" stroke="#ccc" stroke-width="5" stroke-linecap="round"/>
+        <line x1="210" y1="60" x2="238" y2="40" stroke="#ccc" stroke-width="5" stroke-linecap="round"/>
+        <line x1="210" y1="60" x2="207" y2="95" stroke="#ccc" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="210" cy="60" r="6" fill="#555"/>
+        <!-- Wind arrows -->
+        <text x="20" y="55" font-size="20" fill="#0e8fc7" opacity="0.7">〰️</text>
+        <text x="20" y="80" font-size="20" fill="#0e8fc7" opacity="0.5">〰️</text>
+        <!-- Generator box -->
+        <rect x="280" y="108" width="50" height="28" rx="6" fill="#2d8c4e"/>
+        <text x="305" y="126" text-anchor="middle" font-size="9" fill="white" font-weight="700">GEN</text>
+        <line x1="256" y1="78" x2="305" y2="108" stroke="#888" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="360" y="95" font-size="14">⚡</text>
+        <text x="350" y="112" font-size="9" fill="#1a5c2a" font-weight="700">Power</text>
+        <text x="60" y="148" font-size="9" fill="#4a6553">Best in coastal, highland, and open flat areas</text>
+      </svg>
+      <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:6px;">
+        <span class="adv-tag">✅ Advantage</span>
+        <span class="energy-chip">🌬️ Wind source is free</span>
+        <span class="energy-chip">🌱 Clean — zero emissions</span>
+        <span class="energy-chip">♾️ Renewable</span>
+        <span class="energy-chip">🌏 Suitable for coastal Philippines</span>
+      </div>
+    </div>
+
+    <!-- BIOMASS -->
+    <div class="tab-panel" id="tab-biomass" role="tabpanel">
+      <h4>🌾 Biomass Energy</h4>
+      <p>Biomass energy is derived from waste materials of human and animal activities — byproducts of the timber industry, agricultural yields (rice husks, sugarcane bagasse), and municipal solid waste. It uniquely turns <strong>waste into useful energy</strong>.</p>
+      <svg viewBox="0 0 500 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:500px;display:block;margin:12px auto;">
+        <rect x="0" y="0" width="500" height="130" rx="10" fill="#f5f0e8"/>
+        <!-- Cycle arrows -->
+        <text x="80" y="55" text-anchor="middle" font-size="26">🌾</text>
+        <text x="80" y="75" text-anchor="middle" font-size="9" fill="#7a4f2a" font-weight="700">Crop Waste</text>
+        <text x="170" y="55" text-anchor="middle" font-size="26">🪵</text>
+        <text x="170" y="75" text-anchor="middle" font-size="9" fill="#7a4f2a" font-weight="700">Wood/Timber</text>
+        <text x="260" y="55" text-anchor="middle" font-size="26">🗑️</text>
+        <text x="260" y="75" text-anchor="middle" font-size="9" fill="#7a4f2a" font-weight="700">Municipal Waste</text>
+        <text x="350" y="55" text-anchor="middle" font-size="26">🏭</text>
+        <text x="350" y="75" text-anchor="middle" font-size="9" fill="#7a4f2a" font-weight="700">Biomass Plant</text>
+        <text x="440" y="55" text-anchor="middle" font-size="26">⚡</text>
+        <text x="440" y="75" text-anchor="middle" font-size="9" fill="#1a5c2a" font-weight="700">Energy</text>
+        <!-- Arrows -->
+        <text x="120" y="56" text-anchor="middle" font-size="12" fill="#888">→</text>
+        <text x="213" y="56" text-anchor="middle" font-size="12" fill="#888">→</text>
+        <text x="306" y="56" text-anchor="middle" font-size="12" fill="#888">→</text>
+        <text x="396" y="56" text-anchor="middle" font-size="12" fill="#888">→</text>
+        <!-- CO2 cycle note -->
+        <path d="M440,80 Q350,115 80,90" stroke="#4eba72" stroke-width="1.5" fill="none" stroke-dasharray="5,3"/>
+        <text x="260" y="115" text-anchor="middle" font-size="9" fill="#2d8c4e">CO₂ recycled through natural biological cycle ♻️</text>
+      </svg>
+      <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:6px;">
+        <span class="adv-tag">✅ Advantage</span>
+        <span class="energy-chip">♻️ Turns waste into energy</span>
+        <span class="energy-chip">🌱 Biological mass recycled naturally</span>
+        <span class="energy-chip">🔄 Renewable — part of natural cycle</span>
+        <span class="energy-chip">🇵🇭 Huge potential in PH agriculture</span>
+      </div>
+    </div>
+
+    <!-- GEOTHERMAL -->
+    <div class="tab-panel" id="tab-geo" role="tabpanel">
+      <h4>🌋 Geothermal Energy</h4>
+      <p>Geothermal energy taps heat from the Earth's interior. Steam and hot water from underground reservoirs drive turbines to generate electricity. The Philippines is one of the <strong>world's top geothermal energy producers</strong>, thanks to its volcanic geography.</p>
+      <svg viewBox="0 0 500 150" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:500px;display:block;margin:12px auto;">
+        <rect x="0" y="0" width="500" height="150" rx="10" fill="#fff0ee"/>
+        <!-- Underground layers -->
+        <rect x="0" y="100" width="500" height="50" rx="0" fill="#e8d5b8"/>
+        <rect x="0" y="125" width="500" height="25" rx="0" fill="#c0392b" opacity="0.4"/>
+        <text x="250" y="142" text-anchor="middle" font-size="9" fill="#5c1a1a">Magma / Geothermal Reservoir 🌋</text>
+        <!-- Well -->
+        <rect x="195" y="50" width="10" height="75" rx="2" fill="#888"/>
+        <rect x="295" y="50" width="10" height="75" rx="2" fill="#888"/>
+        <!-- Steam rising -->
+        <text x="210" y="40" text-anchor="middle" font-size="18">💨</text>
+        <text x="200" y="25" text-anchor="middle" font-size="9" fill="#c0392b">Hot Steam ↑</text>
+        <!-- Turbine + gen -->
+        <rect x="150" y="20" width="45" height="28" rx="6" fill="#f4a72a" opacity="0.9"/>
+        <text x="172" y="38" text-anchor="middle" font-size="9" fill="white" font-weight="700">Turbine</text>
+        <rect x="220" y="20" width="45" height="28" rx="6" fill="#2d8c4e"/>
+        <text x="242" y="38" text-anchor="middle" font-size="9" fill="white" font-weight="700">Generator</text>
+        <line x1="193" y1="34" x2="222" y2="34" stroke="#888" stroke-width="2"/>
+        <line x1="265" y1="34" x2="310" y2="34" stroke="#888" stroke-width="1.5"/>
+        <text x="340" y="32" font-size="14">⚡</text>
+        <text x="325" y="48" font-size="9" fill="#1a5c2a" font-weight="700">Electricity</text>
+        <!-- Return water -->
+        <path d="M310,50 Q370,70 310,100" stroke="#0e8fc7" stroke-width="2" fill="none" stroke-dasharray="5,3"/>
+        <text x="370" y="80" font-size="9" fill="#0e5c8f">Water returned ↩</text>
+        <text x="30" y="95" font-size="9" fill="#4a6553">🇵🇭 PH is a top-5 geothermal producer globally</text>
+      </svg>
+      <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:6px;">
+        <span class="adv-tag">✅ Advantage</span>
+        <span class="energy-chip">🆓 Source is free of cost</span>
+        <span class="energy-chip">🌿 No harmful byproducts</span>
+        <span class="energy-chip">⚡ Consistent 24/7 power</span>
+        <span class="energy-chip">🇵🇭 Ideal for volcanic Philippines</span>
+      </div>
+    </div>
+
+    <!-- TIDAL/WAVE -->
+    <div class="tab-panel" id="tab-tidal" role="tabpanel">
+      <h4>🌊 Tidal & Wave Energy</h4>
+      <p><strong>Tidal energy</strong> uses the gravitational pull of the sun and moon to create predictable tidal rises and falls, channeled through turbines. <strong>Wave energy</strong> uses the force of ocean waves (not tides) and involves floating structures on the ocean surface — causing less harm to sea life. Both are clean and renewable.</p>
+      <svg viewBox="0 0 500 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:500px;display:block;margin:12px auto;">
+        <rect x="0" y="0" width="500" height="140" rx="10" fill="#e0f0ff"/>
+        <!-- Ocean waves -->
+        <path d="M0,70 Q60,50 120,70 Q180,90 240,70 Q300,50 360,70 Q420,90 500,70 L500,140 L0,140Z" fill="#0e8fc7" opacity="0.6"/>
+        <path d="M0,85 Q80,65 160,85 Q240,105 320,85 Q400,65 500,80 L500,140 L0,140Z" fill="#0e8fc7" opacity="0.35"/>
+        <!-- Tidal turbines -->
+        <circle cx="140" cy="100" r="14" fill="#f4a72a" opacity="0.9"/>
+        <text x="140" y="105" text-anchor="middle" font-size="12">⚙️</text>
+        <rect x="136" y="113" width="8" height="22" rx="2" fill="#888"/>
+        <circle cx="300" cy="98" r="14" fill="#f4a72a" opacity="0.9"/>
+        <text x="300" y="103" text-anchor="middle" font-size="12">⚙️</text>
+        <rect x="296" y="111" width="8" height="24" rx="2" fill="#888"/>
+        <!-- Floating wave buoy -->
+        <ellipse cx="420" cy="72" rx="25" ry="12" fill="#2d8c4e" opacity="0.9"/>
+        <text x="420" y="76" text-anchor="middle" font-size="9" fill="white" font-weight="700">Wave Buoy</text>
+        <!-- Cable to shore -->
+        <path d="M420,83 Q430,110 490,115" stroke="#888" stroke-width="1.5" stroke-dasharray="4,3" fill="none"/>
+        <!-- Moon gravity label -->
+        <text x="50" y="25" font-size="16">🌙</text>
+        <text x="76" y="25" font-size="9" fill="#1a2e50">Moon's gravity drives tides</text>
+        <text x="50" y="50" font-size="9" fill="#0a4f7a">Tides predictable → reliable power</text>
+        <text x="300" y="18" font-size="9" fill="#1a5c2a">Wave energy → floats on surface</text>
+        <text x="300" y="32" font-size="9" fill="#1a5c2a">Less impact on sea life 🐟</text>
+      </svg>
+      <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:6px;">
+        <span class="adv-tag">✅ Advantage</span>
+        <span class="energy-chip">🆓 Free & renewable source</span>
+        <span class="energy-chip">🌱 Clean — no pollution</span>
+        <span class="energy-chip">📈 Predictable (tidal)</span>
+        <span class="energy-chip">🐟 Low impact on marine life (wave)</span>
+      </div>
+    </div>
+
+    <!-- OTEC -->
+    <div class="tab-panel" id="tab-otec" role="tabpanel">
+      <h4>🌡️ Ocean Thermal Energy Conversion (OTEC)</h4>
+      <p>OTEC uses the <strong>temperature difference</strong> between warm tropical surface water and cold deep ocean water to generate electricity. It operates <strong>24/7, year-round</strong>, making it ideal for tropical island nations like the Philippines. It also produces desalinated water and supports mariculture (sea farming).</p>
+      <svg viewBox="0 0 500 155" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:500px;display:block;margin:12px auto;">
+        <rect x="0" y="0" width="500" height="155" rx="10" fill="#e0f8f0"/>
+        <!-- Warm surface -->
+        <rect x="0" y="0" width="500" height="55" rx="10" fill="#f4a72a" opacity="0.18"/>
+        <text x="60" y="28" font-size="10" fill="#7a4000" font-weight="700">🌞 Warm Surface Water (~25°C+)</text>
+        <!-- Cold deep -->
+        <rect x="0" y="105" width="500" height="50" rx="0" fill="#0e8fc7" opacity="0.22"/>
+        <text x="60" y="140" font-size="10" fill="#0a4070" font-weight="700">❄️ Cold Deep Water (~5°C)</text>
+        <!-- OTEC platform -->
+        <rect x="190" y="35" width="120" height="80" rx="10" fill="#1a5c2a" opacity="0.85"/>
+        <text x="250" y="65" text-anchor="middle" font-size="11" fill="white" font-weight="800">OTEC</text>
+        <text x="250" y="80" text-anchor="middle" font-size="9" fill="#c8f0d4">Turbine/Generator</text>
+        <!-- Pipes -->
+        <rect x="230" y="115" width="10" height="30" rx="2" fill="#0e8fc7" opacity="0.8"/>
+        <text x="225" y="152" font-size="8" fill="#0a4070">Cold pipe</text>
+        <rect x="265" y="115" width="10" height="30" rx="2" fill="#f4a72a" opacity="0.8"/>
+        <text x="258" y="152" font-size="8" fill="#7a4000">Warm pipe</text>
+        <!-- Power output -->
+        <line x1="310" y1="75" x2="380" y2="75" stroke="#f4a72a" stroke-width="2"/>
+        <text x="395" y="70" font-size="16">⚡</text>
+        <text x="383" y="85" font-size="9" fill="#1a5c2a" font-weight="700">24/7 Power</text>
+        <!-- Desalinated water -->
+        <line x1="310" y1="95" x2="380" y2="105" stroke="#0e8fc7" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="383" y="108" font-size="9" fill="#0a4070">💧 Fresh water</text>
+      </svg>
+      <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:6px;">
+        <span class="adv-tag">✅ Advantage</span>
+        <span class="energy-chip">⏰ 24/7 baseload electricity</span>
+        <span class="energy-chip">🌱 Clean energy source</span>
+        <span class="energy-chip">💧 Produces fresh water</span>
+        <span class="energy-chip">🐠 Supports mariculture</span>
+        <span class="energy-chip">🇵🇭 Ideal for tropical PH islands</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Challenges collapsible -->
+  <h3 style="font-family:var(--font-head);color:var(--green-dark);margin:24px 0 12px;font-size:1.1rem;">Challenges with Alternative Energy Sources</h3>
+  <div class="collapsible open" id="coll-challenges">
+    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+      <div class="collapsible-header-left">
+        <span class="collapsible-emoji">⚠️</span>
+        <span class="collapsible-title">Why isn't everyone using alternative energy yet?</span>
+      </div>
+      <span class="collapsible-arrow">▼</span>
+    </div>
+    <div class="collapsible-body">
+      <div class="collapsible-inner">
+        <ul>
+          <li><strong>Research phase:</strong> Many sources (wave, OTEC) are still being developed and optimized for large-scale use.</li>
+          <li><strong>Scale challenge:</strong> While small systems are feasible, large-scale power generation remains difficult — hydroelectric is a key exception.</li>
+          <li><strong>Infrastructure cost:</strong> Transitioning requires decommissioning old power plants and building entirely new grids — an enormous upfront investment.</li>
+          <li><strong>Intermittency:</strong> Solar works only with sunlight; wind requires adequate breeze. Storage technology (batteries) must improve.</li>
+          <li><strong>Phased approach:</strong> Most governments plan a gradual shift rather than an immediate transition — it must be done in phases.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:18px;">
+    <div class="callout-icon">🌍</div>
+    <div>
+      <div class="callout-title">Why should we switch NOW?</div>
+      <div class="callout-text">Alternative energy sources are free, clean, and do not burden the environment. If we shift to these sources, CO₂ emissions will decrease significantly, global warming will slow, and our fast-depleting fossil fuel reserves can be preserved for future generations. The damage caused since the Industrial Revolution is enormous — but action now can still make a difference.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== DRAG AND DROP ACTIVITY ===== -->
+<section class="section" id="activity">
+  <div class="section-header">
+    <div class="section-icon" style="background:#fff3cd;">🎮</div>
+    <div>
+      <div class="section-title">Interactive Activity</div>
+      <div class="section-subtitle">Classify each energy type by dragging it to the correct category</div>
+    </div>
+  </div>
+
+  <div class="dnd-section">
+    <h3>🃏 Drag & Drop: Renewable or Alternative?</h3>
+    <div class="dnd-instruction">
+      Drag each energy source to the correct box: <strong>Renewable Energy</strong> (naturally replenishes on its own) or <strong>Alternative Energy Only</strong> (reduces fossil fuels but may not replenish naturally). Some may belong to both — place them where they fit <em>best</em> based on the module!
+    </div>
+
+    <!-- Cards to drag -->
+    <div class="dnd-pool">
+      <div class="dnd-pool-title">📦 Energy Sources — Drag these below</div>
+      <div id="dndCardPool">
+        <div class="draggable" draggable="true" data-type="renewable" data-id="solar" id="card-solar">☀️ Solar Energy</div>
+        <div class="draggable" draggable="true" data-type="renewable" data-id="wind" id="card-wind">💨 Wind Energy</div>
+        <div class="draggable" draggable="true" data-type="alternative" data-id="natgas" id="card-natgas">🔩 Natural Gas Cogeneration</div>
+        <div class="draggable" draggable="true" data-type="renewable" data-id="hydro" id="card-hydro">💧 Hydroelectric</div>
+        <div class="draggable" draggable="true" data-type="renewable" data-id="geo" id="card-geo">🌋 Geothermal</div>
+        <div class="draggable" draggable="true" data-type="alternative" data-id="fuelcell" id="card-fuelcell">⚗️ Fuel Cells</div>
+        <div class="draggable" draggable="true" data-type="renewable" data-id="biomass" id="card-biomass">🌾 Biomass</div>
+        <div class="draggable" draggable="true" data-type="renewable" data-id="tidal" id="card-tidal">🌊 Tidal Energy</div>
+      </div>
+    </div>
+
+    <!-- Drop zones -->
+    <div class="dnd-drop-zones" style="margin-top:16px;">
+      <div class="drop-zone" id="zone-renewable"
+           ondragover="allowDrop(event)" ondrop="dropItem(event,'renewable')" ondragleave="removeDragOver(event)">
+        <div class="drop-zone-label">🌿 Renewable Energy</div>
+        <div style="font-size:0.78rem;color:var(--text-light);margin-bottom:8px;">Naturally replenishes; always available</div>
+      </div>
+      <div class="drop-zone" id="zone-alternative"
+           ondragover="allowDrop(event)" ondrop="dropItem(event,'alternative')" ondragleave="removeDragOver(event)">
+        <div class="drop-zone-label">⚡ Alternative Energy Only</div>
+        <div style="font-size:0.78rem;color:var(--text-light);margin-bottom:8px;">Reduces fossil fuel use but may not replenish naturally</div>
+      </div>
+    </div>
+
+    <div class="dnd-feedback" id="dndFeedback"></div>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="dnd-btn" onclick="checkDnD()">✅ Check Answers</button>
+      <button class="dnd-btn secondary" onclick="resetDnD()">🔄 Reset Activity</button>
+    </div>
+    <div id="dndScore" style="margin-top:12px;font-size:0.88rem;font-weight:700;color:var(--green-dark);display:none;"></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== QUIZ ===== -->
+<section class="section" id="quiz">
+  <div class="section-header">
+    <div class="section-icon" style="background:#d4f5e0;">📝</div>
+    <div>
+      <div class="section-title">Knowledge Check Quiz</div>
+      <div class="section-subtitle">Test your understanding — 8 questions with instant feedback</div>
+    </div>
+  </div>
+
+  <div class="quiz-wrap">
+    <div class="quiz-header">
+      <div class="quiz-title">Lesson 14 Quiz</div>
+      <div class="quiz-score-badge" id="quizScoreBadge">Score: 0/8</div>
+    </div>
+
+    <!-- Questions will be rendered here -->
+    <div id="quizBody">
+      <!-- Q1 -->
+      <div class="question-card active" data-q="0">
+        <div class="q-num">Question 1 of 8</div>
+        <div class="q-text">What is the main difference between renewable energy and alternative energy?</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,0,0)"><span class="q-option-letter">A</span>Renewable energy is more expensive than alternative energy.</div>
+          <div class="q-option" onclick="selectOption(this,0,1)"><span class="q-option-letter">B</span>Renewable energy naturally replenishes without human intervention, while alternative energy may not always replenish naturally.</div>
+          <div class="q-option" onclick="selectOption(this,0,2)"><span class="q-option-letter">C</span>Alternative energy includes only solar and wind, while renewable energy includes all others.</div>
+          <div class="q-option" onclick="selectOption(this,0,3)"><span class="q-option-letter">D</span>There is no difference — they are the same thing.</div>
+        </div>
+        <div class="q-feedback" id="fb-0"></div>
+      </div>
+      <!-- Q2 -->
+      <div class="question-card" data-q="1">
+        <div class="q-num">Question 2 of 8</div>
+        <div class="q-text">Which factor was a major contributor to the 2000s global energy crisis?</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,1,0)"><span class="q-option-letter">A</span>Overproduction of oil in the Middle East</div>
+          <div class="q-option" onclick="selectOption(this,1,1)"><span class="q-option-letter">B</span>Middle East tensions, dwindling oil reserves, and peak oil concerns</div>
+          <div class="q-option" onclick="selectOption(this,1,2)"><span class="q-option-letter">C</span>The widespread adoption of solar energy</div>
+          <div class="q-option" onclick="selectOption(this,1,3)"><span class="q-option-letter">D</span>A decrease in global population</div>
+        </div>
+        <div class="q-feedback" id="fb-1"></div>
+      </div>
+      <!-- Q3 -->
+      <div class="question-card" data-q="2">
+        <div class="q-num">Question 3 of 8</div>
+        <div class="q-text">Hydroelectric power is generated by using the potential energy of water to drive a:</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,2,0)"><span class="q-option-letter">A</span>Solar panel array</div>
+          <div class="q-option" onclick="selectOption(this,2,1)"><span class="q-option-letter">B</span>Wind turbine</div>
+          <div class="q-option" onclick="selectOption(this,2,2)"><span class="q-option-letter">C</span>Water turbine and generator</div>
+          <div class="q-option" onclick="selectOption(this,2,3)"><span class="q-option-letter">D</span>Nuclear reactor</div>
+        </div>
+        <div class="q-feedback" id="fb-2"></div>
+      </div>
+      <!-- Q4 -->
+      <div class="question-card" data-q="3">
+        <div class="q-num">Question 4 of 8</div>
+        <div class="q-text">Solar power generation is done by using a series of ___ that convert solar rays into electricity.</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,3,0)"><span class="q-option-letter">A</span>Biomass reactors</div>
+          <div class="q-option" onclick="selectOption(this,3,1)"><span class="q-option-letter">B</span>Photovoltaic (PV) cells</div>
+          <div class="q-option" onclick="selectOption(this,3,2)"><span class="q-option-letter">C</span>Tidal turbines</div>
+          <div class="q-option" onclick="selectOption(this,3,3)"><span class="q-option-letter">D</span>Geothermal wells</div>
+        </div>
+        <div class="q-feedback" id="fb-3"></div>
+      </div>
+      <!-- Q5 -->
+      <div class="question-card" data-q="4">
+        <div class="q-num">Question 5 of 8</div>
+        <div class="q-text">Biomass energy is considered renewable because:</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,4,0)"><span class="q-option-letter">A</span>It is sourced from underground fossil deposits</div>
+          <div class="q-option" onclick="selectOption(this,4,1)"><span class="q-option-letter">B</span>Biological mass continually generates and decomposes as part of the natural biological cycle</div>
+          <div class="q-option" onclick="selectOption(this,4,2)"><span class="q-option-letter">C</span>It comes from ocean tides powered by the moon</div>
+          <div class="q-option" onclick="selectOption(this,4,3)"><span class="q-option-letter">D</span>It uses photovoltaic panels to capture sunlight</div>
+        </div>
+        <div class="q-feedback" id="fb-4"></div>
+      </div>
+      <!-- Q6 -->
+      <div class="question-card" data-q="5">
+        <div class="q-num">Question 6 of 8</div>
+        <div class="q-text">What makes OTEC (Ocean Thermal Energy Conversion) particularly suitable for the Philippines?</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,5,0)"><span class="q-option-letter">A</span>The Philippines has very strong wind currents year-round</div>
+          <div class="q-option" onclick="selectOption(this,5,1)"><span class="q-option-letter">B</span>The Philippines has large oil reserves offshore</div>
+          <div class="q-option" onclick="selectOption(this,5,2)"><span class="q-option-letter">C</span>The Philippines is a tropical island nation with warm surface waters and access to cold deep ocean water</div>
+          <div class="q-option" onclick="selectOption(this,5,3)"><span class="q-option-letter">D</span>OTEC only works in cold polar regions</div>
+        </div>
+        <div class="q-feedback" id="fb-5"></div>
+      </div>
+      <!-- Q7 -->
+      <div class="question-card" data-q="6">
+        <div class="q-num">Question 7 of 8</div>
+        <div class="q-text">Which alternative energy source is currently the MOST widely adopted worldwide?</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,6,0)"><span class="q-option-letter">A</span>Wave energy</div>
+          <div class="q-option" onclick="selectOption(this,6,1)"><span class="q-option-letter">B</span>Tidal energy</div>
+          <div class="q-option" onclick="selectOption(this,6,2)"><span class="q-option-letter">C</span>Hydroelectric energy</div>
+          <div class="q-option" onclick="selectOption(this,6,3)"><span class="q-option-letter">D</span>OTEC</div>
+        </div>
+        <div class="q-feedback" id="fb-6"></div>
+      </div>
+      <!-- Q8 -->
+      <div class="question-card" data-q="7">
+        <div class="q-num">Question 8 of 8</div>
+        <div class="q-text">Switching to alternative energy sources will primarily help to:</div>
+        <div class="q-options">
+          <div class="q-option" onclick="selectOption(this,7,0)"><span class="q-option-letter">A</span>Increase carbon dioxide emissions globally</div>
+          <div class="q-option" onclick="selectOption(this,7,1)"><span class="q-option-letter">B</span>Reduce CO₂ emissions, slow global warming, and preserve fossil fuel reserves</div>
+          <div class="q-option" onclick="selectOption(this,7,2)"><span class="q-option-letter">C</span>Increase dependence on Middle Eastern oil</div>
+          <div class="q-option" onclick="selectOption(this,7,3)"><span class="q-option-letter">D</span>Lower the quality of electricity for consumers</div>
+        </div>
+        <div class="q-feedback" id="fb-7"></div>
+      </div>
+    </div>
+
+    <!-- Results screen -->
+    <div class="quiz-results" id="quizResults">
+      <div class="result-emoji" id="resultEmoji">🌟</div>
+      <div class="result-score" id="resultScore">8/8</div>
+      <div class="result-msg" id="resultMsg">Excellent work!</div>
+      <button class="quiz-btn" onclick="restartQuiz()" style="margin-top:4px;">🔄 Retake Quiz</button>
+    </div>
+
+    <!-- Navigation -->
+    <div class="quiz-nav" id="quizNav">
+      <button class="quiz-btn outline" id="prevBtn" onclick="prevQuestion()" disabled>← Prev</button>
+      <div class="q-progress-dots" id="qDots"></div>
+      <button class="quiz-btn" id="nextBtn" onclick="nextQuestion()">Next →</button>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== SUMMARY ===== -->
+<section class="section" id="summary">
+  <div class="section-header">
+    <div class="section-icon" style="background:#d4f5e0;">✅</div>
+    <div>
+      <div class="section-title">Lesson Summary</div>
+      <div class="section-subtitle">Key takeaways from Lesson 14</div>
+    </div>
+  </div>
+
+  <div class="summary-grid">
+    <div class="summary-card">
+      <div class="summary-card-icon">⚡</div>
+      <div class="summary-card-title">Energy Crisis</div>
+      <div class="summary-card-text">A significant decrease in energy supply caused by overconsumption of finite fossil fuels, geopolitical instability, and population growth.</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-card-icon">🌿</div>
+      <div class="summary-card-title">Alternative Energy</div>
+      <div class="summary-card-text">Any energy source that replaces fossil fuels. Broader than renewable — includes fuel cells and natural gas cogeneration.</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-card-icon">☀️</div>
+      <div class="summary-card-title">Solar Energy</div>
+      <div class="summary-card-text">PV cells convert sunlight to electricity. Free, clean, and will be available for thousands of years.</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-card-icon">💧</div>
+      <div class="summary-card-title">Hydroelectric</div>
+      <div class="summary-card-text">Most widely adopted alternative energy. Uses stored water energy to drive turbines — clean and continuous.</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-card-icon">💨</div>
+      <div class="summary-card-title">Wind Energy</div>
+      <div class="summary-card-text">Wind turbines convert kinetic energy of wind to electricity. Ideal for coastal and highland areas in the Philippines.</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-card-icon">🌾</div>
+      <div class="summary-card-title">Biomass</div>
+      <div class="summary-card-text">Converts agricultural, timber, and municipal wastes into energy — recycling matter through the biological cycle.</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-card-icon">🌋</div>
+      <div class="summary-card-title">Geothermal</div>
+      <div class="summary-card-text">Taps Earth's heat through volcanic activity. Philippines is a world leader in geothermal energy production.</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-card-icon">🌡️</div>
+      <div class="summary-card-title">OTEC</div>
+      <div class="summary-card-text">Uses ocean temperature differences to generate 24/7 baseload power. Also produces fresh water and supports sea farming.</div>
+    </div>
+  </div>
+
+  <div class="info-box sky">
+    <p><strong>Reflection Prompt for BS Psychology students:</strong> How might the energy crisis affect mental health and community well-being in rural Philippine communities? What psychological barriers might prevent people from adopting alternative energy at the household level?</p>
+  </div>
+  <div class="info-box earth" style="margin-top:12px;">
+    <p><strong>Reflection Prompt for BS Agriculture students:</strong> Which alternative energy sources are most applicable to Philippine farmlands? How can biomass from agricultural waste (rice husks, sugarcane bagasse, corn stalks) be converted into usable energy for rural farm communities?</p>
+  </div>
+</section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div>🌿 <strong>Lesson 14: Alternative Energy Resources</strong> — Science, Technology and Society (STS)</div>
+  <div style="margin:6px 0;"><span>Module created by </span><strong>Richard G. Cadizal</strong><span>, College Instructor · Don Mariano Marcos Memorial State University (DMMMSU)</span></div>
+  <div><span>MA in Science Education · PhD Candidate · MIT AI Education Training</span></div>
+</footer>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+// ─── PROGRESS BAR ───────────────────────────────────────
+window.addEventListener('scroll', () => {
+  const docH = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = (window.scrollY / docH) * 100;
+  document.getElementById('progressFill').style.width = progress + '%';
+
+  // Update active nav button
+  const sections = ['objectives','intro','crisis','sources','activity','quiz','summary'];
+  let currentSection = sections[0];
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top <= 120) currentSection = id;
+  });
+  document.querySelectorAll('.nav-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', sections[i] === currentSection);
+  });
+});
+
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ─── COLLAPSIBLE ────────────────────────────────────────
+function toggleCollapsible(header) {
+  const parent = header.closest('.collapsible');
+  parent.classList.toggle('open');
+}
+
+// ─── TABS ───────────────────────────────────────────────
+function switchTab(btn, panelId) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(panelId).classList.add('active');
+}
+
+// ─── QUIZ LOGIC ─────────────────────────────────────────
+const ANSWERS = [1, 1, 2, 1, 1, 2, 2, 1]; // 0-indexed correct option for each question
+const FEEDBACKS = [
+  { correct: "✅ Correct! Renewable energy replenishes naturally (solar, wind, water, geothermal). Alternative energy is the broader category that also includes options like fuel cells and natural gas cogeneration that don't naturally replenish.", wrong: "❌ Not quite. The key distinction: renewable energy sources naturally replenish on their own, while alternative energy is a broader category that includes some sources that don't replenish naturally but still produce fewer emissions than fossil fuels." },
+  { correct: "✅ Correct! The 2000s energy crisis was driven by Middle East tensions, falling U.S. dollar value, dwindling oil reserves, peak oil concerns, and speculative pricing — pushing oil to $147.30/barrel in 2008.", wrong: "❌ Incorrect. The 2000s crisis was triggered by Middle East tensions, falling U.S. dollar, dwindling reserves, and peak oil fears — NOT by overproduction or solar energy adoption." },
+  { correct: "✅ Correct! Stored water potential energy drives a water turbine connected to a generator that produces electricity — this is the hydroelectric process.", wrong: "❌ Incorrect. Hydroelectric power uses water to drive a turbine (not solar panels, wind blades, or nuclear reactions). Water → Turbine → Generator → Electricity." },
+  { correct: "✅ Correct! Photovoltaic (PV) cells directly convert solar radiation into electrical energy through the photovoltaic effect — the foundation of solar panel technology.", wrong: "❌ Incorrect. The correct answer is photovoltaic (PV) cells — semiconductor devices that generate electricity when sunlight hits them." },
+  { correct: "✅ Correct! Biomass is renewable because biological mass continuously generates and decomposes as part of Earth's natural biological cycle — it never truly runs out.", wrong: "❌ Incorrect. Biomass is renewable because biological matter (plants, waste) keeps generating and decomposing naturally, making it a continuously available resource." },
+  { correct: "✅ Correct! OTEC works on the principle that warm tropical surface water and cold deep water create a temperature difference. The Philippines, being a tropical archipelago surrounded by deep ocean, is perfectly positioned for OTEC.", wrong: "❌ Incorrect. OTEC uses temperature differences between warm surface and cold deep ocean water. The Philippines' tropical location and deep ocean access make it ideal — not wind, oil reserves, or polar conditions." },
+  { correct: "✅ Correct! Hydroelectric power is currently the most widely and commercially adopted alternative energy source in the world, as it can generate large amounts of power reliably and consistently.", wrong: "❌ Incorrect. Hydroelectric energy is the most widely adopted alternative energy source globally at present. Wave, tidal, and OTEC are still in earlier stages of development." },
+  { correct: "✅ Correct! Shifting to alternative energy significantly reduces CO₂ emissions (slowing global warming), preserves dwindling fossil fuel reserves, and reduces air, soil, and water pollution.", wrong: "❌ Incorrect. The primary benefits of alternative energy are reducing CO₂ emissions, combating global warming, and preserving fossil fuel reserves — not increasing emissions or fossil fuel dependence." },
+];
+
+let currentQ = 0;
+let answered = new Array(8).fill(false);
+let scores = new Array(8).fill(false);
+let score = 0;
+
+function initQuizDots() {
+  const dotContainer = document.getElementById('qDots');
+  dotContainer.innerHTML = '';
+  for (let i = 0; i < 8; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'q-dot' + (i === 0 ? ' current' : '');
+    dot.id = 'dot-' + i;
+    dotContainer.appendChild(dot);
+  }
+}
+initQuizDots();
+
+function updateDots() {
+  for (let i = 0; i < 8; i++) {
+    const dot = document.getElementById('dot-' + i);
+    dot.className = 'q-dot';
+    if (i === currentQ) dot.classList.add('current');
+    else if (answered[i]) dot.classList.add('done');
+  }
+}
+
+function selectOption(el, qIdx, optIdx) {
+  if (answered[qIdx]) return;
+  answered[qIdx] = true;
+
+  const options = el.parentElement.querySelectorAll('.q-option');
+  options.forEach((opt, i) => {
+    opt.classList.remove('selected');
+    if (i === ANSWERS[qIdx]) opt.classList.add('correct');
+  });
+
+  const feedback = document.getElementById('fb-' + qIdx);
+  if (optIdx === ANSWERS[qIdx]) {
+    el.classList.add('correct');
+    scores[qIdx] = true;
+    score++;
+    feedback.className = 'q-feedback show correct-fb';
+    feedback.innerHTML = FEEDBACKS[qIdx].correct;
+  } else {
+    el.classList.add('wrong');
+    scores[qIdx] = false;
+    feedback.className = 'q-feedback show wrong-fb';
+    feedback.innerHTML = FEEDBACKS[qIdx].wrong;
+  }
+
+  document.getElementById('quizScoreBadge').textContent = 'Score: ' + scores.filter(Boolean).length + '/8';
+  updateDots();
+}
+
+function nextQuestion() {
+  if (currentQ < 7) {
+    document.querySelectorAll('.question-card')[currentQ].classList.remove('active');
+    currentQ++;
+    document.querySelectorAll('.question-card')[currentQ].classList.add('active');
+    document.getElementById('prevBtn').disabled = false;
+    if (currentQ === 7) document.getElementById('nextBtn').textContent = 'Finish 🎉';
+    updateDots();
+  } else {
+    showResults();
+  }
+}
+
+function prevQuestion() {
+  if (currentQ > 0) {
+    document.querySelectorAll('.question-card')[currentQ].classList.remove('active');
+    currentQ--;
+    document.querySelectorAll('.question-card')[currentQ].classList.add('active');
+    document.getElementById('nextBtn').textContent = currentQ === 7 ? 'Finish 🎉' : 'Next →';
+    if (currentQ === 0) document.getElementById('prevBtn').disabled = true;
+    updateDots();
+  }
+}
+
+function showResults() {
+  document.getElementById('quizBody').style.display = 'none';
+  document.getElementById('quizNav').style.display = 'none';
+  const finalScore = scores.filter(Boolean).length;
+  const res = document.getElementById('quizResults');
+  res.classList.add('show');
+  document.getElementById('resultScore').textContent = finalScore + '/8';
+  let emoji, msg;
+  if (finalScore === 8) { emoji = '🏆'; msg = 'Perfect score! Outstanding mastery of Alternative Energy Resources!'; }
+  else if (finalScore >= 6) { emoji = '🌟'; msg = 'Great job! You have a solid grasp of the key concepts.'; }
+  else if (finalScore >= 4) { emoji = '👍'; msg = 'Good effort! Review the tabs and try again for a higher score.'; }
+  else { emoji = '📚'; msg = 'Keep studying! Re-read the lesson content and retake the quiz.'; }
+  document.getElementById('resultEmoji').textContent = emoji;
+  document.getElementById('resultMsg').textContent = msg;
+}
+
+function restartQuiz() {
+  currentQ = 0; answered = new Array(8).fill(false);
+  scores = new Array(8).fill(false); score = 0;
+  document.getElementById('quizResults').classList.remove('show');
+  document.getElementById('quizBody').style.display = 'block';
+  document.getElementById('quizNav').style.display = 'flex';
+  document.getElementById('quizScoreBadge').textContent = 'Score: 0/8';
+  document.getElementById('prevBtn').disabled = true;
+  document.getElementById('nextBtn').textContent = 'Next →';
+
+  document.querySelectorAll('.question-card').forEach((card, i) => {
+    card.classList.toggle('active', i === 0);
+    card.querySelectorAll('.q-option').forEach(opt => {
+      opt.classList.remove('selected','correct','wrong');
+    });
+    const fb = document.getElementById('fb-' + i);
+    if (fb) fb.className = 'q-feedback';
+  });
+  initQuizDots();
+}
+
+// ─── DRAG AND DROP ──────────────────────────────────────
+let dragId = null;
+const correctAnswers = {
+  solar: 'renewable', wind: 'renewable', natgas: 'alternative',
+  hydro: 'renewable', geo: 'renewable', fuelcell: 'alternative',
+  biomass: 'renewable', tidal: 'renewable'
+};
+
+document.querySelectorAll('.draggable').forEach(card => {
+  card.addEventListener('dragstart', e => {
+    dragId = card.id;
+    e.dataTransfer.effectAllowed = 'move';
+    setTimeout(() => card.style.opacity = '0.5', 0);
+  });
+  card.addEventListener('dragend', () => { card.style.opacity = ''; });
+});
+
+function allowDrop(e) {
+  e.preventDefault();
+  e.currentTarget.classList.add('dragover');
+}
+function removeDragOver(e) { e.currentTarget.classList.remove('dragover'); }
+
+function dropItem(e, zoneType) {
+  e.preventDefault();
+  e.currentTarget.classList.remove('dragover');
+  if (!dragId) return;
+  const card = document.getElementById(dragId);
+  if (!card) return;
+  e.currentTarget.appendChild(card);
+  card.style.opacity = '';
+  dragId = null;
+}
+
+function checkDnD() {
+  const feedback = document.getElementById('dndFeedback');
+  const scoreEl = document.getElementById('dndScore');
+  let correct = 0; let total = 0;
+
+  document.querySelectorAll('.draggable').forEach(card => {
+    const id = card.dataset.id;
+    const parentZone = card.closest('.drop-zone');
+    if (!parentZone) return;
+    total++;
+    const zoneId = parentZone.id;
+    const expected = correctAnswers[id];
+    const dropped = zoneId === 'zone-renewable' ? 'renewable' : 'alternative';
+    if (dropped === expected) {
+      card.classList.remove('wrong-dnd'); card.classList.add('correct-dnd'); correct++;
+    } else {
+      card.classList.remove('correct-dnd'); card.classList.add('wrong-dnd');
+    }
+  });
+
+  if (total === 0) {
+    feedback.className = 'dnd-feedback show partial';
+    feedback.textContent = '⚠️ Drag at least one card to a drop zone first!';
+    return;
+  }
+
+  scoreEl.style.display = 'block';
+  scoreEl.textContent = `Result: ${correct} / ${total} correct`;
+
+  if (correct === 8) {
+    feedback.className = 'dnd-feedback show correct';
+    feedback.textContent = '🏆 Perfect! All energy sources correctly classified! Solar, Wind, Hydro, Geothermal, Biomass, and Tidal are Renewable. Natural Gas Cogeneration and Fuel Cells are Alternative only.';
+  } else if (correct >= 5) {
+    feedback.className = 'dnd-feedback show partial';
+    feedback.textContent = `👍 Good effort! ${correct}/8 correct. Items highlighted in red need to be moved. Remember: renewable = naturally replenishes; alternative only = reduces emissions but may not replenish naturally.`;
+  } else {
+    feedback.className = 'dnd-feedback show wrong';
+    feedback.textContent = `📚 Keep trying! ${correct}/8 correct. Review: Renewable sources naturally replenish (solar, wind, hydro, geo, biomass, tidal). Alternative-only sources reduce emissions but don't naturally replenish (natural gas cogeneration, fuel cells).`;
+  }
+}
+
+function resetDnD() {
+  const pool = document.getElementById('dndCardPool');
+  document.querySelectorAll('.draggable').forEach(card => {
+    card.classList.remove('correct-dnd','wrong-dnd','placed');
+    card.style.opacity = '';
+    pool.appendChild(card);
+  });
+  const feedback = document.getElementById('dndFeedback');
+  feedback.className = 'dnd-feedback';
+  document.getElementById('dndScore').style.display = 'none';
+}
+
+// ─── TOUCH DRAG SUPPORT (mobile) ────────────────────────
+// Basic touch-to-drag simulation for mobile
+let touchDragCard = null;
+let touchClone = null;
+
+document.querySelectorAll('.draggable').forEach(card => {
+  card.addEventListener('touchstart', e => {
+    touchDragCard = card;
+    const touch = e.touches[0];
+    touchClone = card.cloneNode(true);
+    touchClone.style.cssText = `position:fixed;z-index:9999;pointer-events:none;opacity:0.85;
+      left:${touch.clientX - 40}px;top:${touch.clientY - 20}px;transform:scale(1.08);`;
+    document.body.appendChild(touchClone);
+  }, { passive: true });
+
+  card.addEventListener('touchmove', e => {
+    if (!touchClone) return;
+    e.preventDefault();
+    const touch = e.touches[0];
+    touchClone.style.left = (touch.clientX - 40) + 'px';
+    touchClone.style.top = (touch.clientY - 20) + 'px';
+    // highlight drop zones
+    document.querySelectorAll('.drop-zone').forEach(zone => {
+      const rect = zone.getBoundingClientRect();
+      if (touch.clientX >= rect.left && touch.clientX <= rect.right &&
+          touch.clientY >= rect.top && touch.clientY <= rect.bottom) {
+        zone.classList.add('dragover');
+      } else {
+        zone.classList.remove('dragover');
+      }
+    });
+  }, { passive: false });
+
+  card.addEventListener('touchend', e => {
+    if (touchClone) { document.body.removeChild(touchClone); touchClone = null; }
+    if (!touchDragCard) return;
+    const touch = e.changedTouches[0];
+    document.querySelectorAll('.drop-zone').forEach(zone => {
+      zone.classList.remove('dragover');
+      const rect = zone.getBoundingClientRect();
+      if (touch.clientX >= rect.left && touch.clientX <= rect.right &&
+          touch.clientY >= rect.top && touch.clientY <= rect.bottom) {
+        zone.appendChild(touchDragCard);
+      }
+    });
+    touchDragCard = null;
+  });
+});
+</script>
+</body>
+</html>
